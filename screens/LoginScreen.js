@@ -1,16 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 // styling
 import { Button, Input, Image } from 'react-native-elements'
 import { StatusBar } from 'expo-status-bar'
+// firebase
+import { auth } from '../firebase'
 
 const LoginScreen = (props) => {
   const { navigation } = props
+  // states
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  // run only when the component is mounting
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        // if logged in, go to home screen
+        navigation.replace('Home')
+      }
+    })
+    // clean up function
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
   const signIn = () => {
-
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .catch(error => alert(error))
   }
 
   const register = () => {
@@ -37,10 +55,20 @@ const LoginScreen = (props) => {
           type="password"
           value={password}
           onChangeText={text => setPassword(text)}
+          onSubmitEditing={signIn}
         />
       </View>
-      <Button containerStyle={styles.button} onPress={signIn} title='Login' />
-      <Button containerStyle={styles.button} onPress={register} type='outline' title='Register' />
+      <Button 
+        containerStyle={styles.button} 
+        onPress={signIn} 
+        title='Login'
+      />
+      <Button 
+        containerStyle={styles.button}
+        onPress={register}
+        type='outline'
+        title='Register'
+      />
       {/* add an empty View to prevent keyboard blocking the bottom button */}
       <View style={{ height: 100 }} />
     </KeyboardAvoidingView>
