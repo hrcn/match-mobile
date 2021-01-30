@@ -7,17 +7,17 @@ const CustomListItem = (props) => {
   const { id, chatName, enterChat } = props
 
   return (
-    <ListItem>
+    <ListItem key={id} bottomDivider>
       <Avatar 
         rounded
         source={{uri: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png'}}
       />
       <ListItem.Content>
         <ListItem.Title style={{fontWeight: '800'}}>
-          Chat
+          { chatName }
         </ListItem.Title>
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode='tail'>
-          This is a subtitle aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          this is subtitle
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
