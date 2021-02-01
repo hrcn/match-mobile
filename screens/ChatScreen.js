@@ -16,13 +16,13 @@ const ChatScreen = (props) => {
   const { navigation, route } = props
   // states
   const [input, setInput] = useState('')
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages ] = useState([])
 
   const sendMessage = () => {
     // force the keyboard to hide
     Keyboard.dismiss()
     
-    db.collection('chats').doc(route.params.id).collection('message').add({
+    db.collection('chats').doc(route.params.id).collection('messages').add({
       // using the server timestamp to get it unified
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       message: input,
@@ -151,13 +151,10 @@ const ChatScreen = (props) => {
                 value={input}
                 onChangeText={text => setInput(text)}
                 onSubmitEditing={sendMessage}
-                placeholder='enter your message'
+                placeholder='Enter Message'
                 style={styles.textInput}
               />
-              <TouchableOpacity
-                onPress={sendMessage}
-                activeOpacity={0.5}
-              >
+              <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
                 <Ionicons name='send' size={24} color='#2B68E6' />
               </TouchableOpacity>
             </View>
@@ -216,16 +213,6 @@ const styles = StyleSheet.create({
     // rounded border
     borderRadius: 30
   },
-  receiver: {
-    padding: 15,
-    backgroundColor: '#ECECEC',
-    alignSelf: 'flex-end',
-    borderRadius: 20,
-    marginRight: 15,
-    marginBottom: 20,
-    maxWidth: '80%',
-    position: 'relative'
-  },
   sender: {
     padding: 15,
     backgroundColor: '#2B68E6',
@@ -247,7 +234,19 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 15
   },
+  receiver: {
+    padding: 15,
+    backgroundColor: '#ECECEC',
+    alignSelf: 'flex-end',
+    borderRadius: 20,
+    marginRight: 15,
+    marginBottom: 20,
+    maxWidth: '80%',
+    position: 'relative'
+  },
   receiverText: {
-
+    color: 'black',
+    fontWeight: '500',
+    marginLeft: 10
   }
 })
