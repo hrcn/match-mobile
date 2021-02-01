@@ -13,3 +13,9 @@ https://docs.expo.io/guides/using-firebase/
 https://reactnative.dev/docs/touchableopacity
 
 A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, dimming it.
+
+## KeyboardAvoidingView & TouchableWithoutFeedback
+
+https://reactnative.dev/docs/keyboardavoidingview
+
+It is a component to solve the common problem of views that need to move out of the way of the virtual keyboard. It can automatically adjust either its height, position, or bottom padding based on the keyboard height.

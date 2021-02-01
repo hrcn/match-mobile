@@ -7,7 +7,7 @@ const CustomListItem = (props) => {
   const { id, chatName, enterChat } = props
 
   return (
-    <ListItem key={id} bottomDivider>
+    <ListItem onPress={() => enterChat(id, chatName)} key={id} bottomDivider>
       <Avatar 
         rounded
         source={{uri: 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png'}}

@@ -19,6 +19,13 @@ const HomeScreen = (props) => {
     })
   }
 
+  const enterChat = (id, chatName) => {
+    navigation.navigate('Chat', {
+      id,
+      chatName
+    })
+  }
+
   useEffect(() => {
     const unsubscribe = db.collection('chats').onSnapshot(snapshot => {
       return setChats(snapshot.docs.map(doc => ({
@@ -73,7 +80,12 @@ const HomeScreen = (props) => {
             const { id, data } = chat
             const { chatName } = data
             return (
-              <CustomListItem key={id} id={id} chatName={chatName} />
+              <CustomListItem 
+                key={id} 
+                id={id} 
+                chatName={chatName} 
+                enterChat={enterChat}
+              />
             )
           })
         }
